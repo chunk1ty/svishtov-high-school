@@ -36,11 +36,11 @@ namespace SvishtovHighSchool.Domain.Domain
         }
 
         // push atomic aggregate changes to local history for further processing (EventStore.SaveEvents)
-        private void ApplyChange(Event @event, bool isNew)
+        private void ApplyChange(Event ev, bool isNew)
         {
-            dynamic d = this;
-            dynamic e = @event;
-            d.Apply(e);
+            dynamic domainObject = this;
+            dynamic @event = ev;
+            domainObject.Apply(@event);
 
             if (isNew)
             {

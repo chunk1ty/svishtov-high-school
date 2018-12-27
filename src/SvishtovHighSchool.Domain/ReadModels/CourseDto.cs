@@ -6,7 +6,7 @@ namespace SvishtovHighSchool.Domain.ReadModels
     {
         public Guid Id { get; }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public CourseDto(Guid id, string name)
         {

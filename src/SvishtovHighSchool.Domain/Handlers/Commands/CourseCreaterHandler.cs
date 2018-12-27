@@ -1,9 +1,9 @@
 ﻿using SvishtovHighSchool.Domain.Commands;
 using SvishtovHighSchool.Domain.Domain;
 
-namespace SvishtovHighSchool.Domain.Handlers
+namespace SvishtovHighSchool.Domain.Handlers.Commands
 {
-    public class CourseCreaterHandler : IHandles<CourseCreateCommand>
+    public class CourseCreaterHandler : IHandles<CreateCourse>
     {
         private readonly IRepository<Course> _repository;
 
@@ -12,7 +12,7 @@ namespace SvishtovHighSchool.Domain.Handlers
             _repository = repository;
         }
 
-        public void Handle(CourseCreateCommand message)
+        public void Handle(CreateCourse message)
         {
             var item = new Course(message.Id, message.Name);
 

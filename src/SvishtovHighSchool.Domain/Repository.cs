@@ -19,10 +19,12 @@ namespace SvishtovHighSchool.Domain
 
         public T GetById(Guid id)
         {
-            var obj = new T();//lots of ways to do this
-            var e = _storage.GetEventsForAggregate(id);
-            obj.LoadsFromHistory(e);
-            return obj;
+            var events = _storage.GetEventsForAggregate(id);
+
+            var domainObject = new T();//lots of ways to do this
+            
+            domainObject.LoadsFromHistory(events);
+            return domainObject;
         }
     }
 }

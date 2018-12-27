@@ -21,7 +21,23 @@ namespace SvishtovHighSchool.Domain.Domain
 
         public string Name => _name;
 
+        public void ChangeName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("newName");
+            }
+
+            ApplyChange(new CourseNameChanged(_id, name));
+        }
+
         public void Apply(CourseCreated courseCreated)
+        {
+            _id = courseCreated.Id;
+            _name = courseCreated.Name;
+        }
+
+        public void Apply(CourseNameChanged courseCreated)
         {
             _id = courseCreated.Id;
             _name = courseCreated.Name;
