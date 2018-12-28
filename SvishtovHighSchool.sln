@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{266A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.Console", "src\Clients\SvishtovHighSchool.Console\SvishtovHighSchool.Console.csproj", "{8D1CB8D6-E60E-4958-885E-FF631ABC3A79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.EventStore", "src\SvishtovHighSchool.EventStore\SvishtovHighSchool.EventStore.csproj", "{F976574D-99A5-4715-89FA-39EB98ABD157}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{8D1CB8D6-E60E-4958-885E-FF631ABC3A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D1CB8D6-E60E-4958-885E-FF631ABC3A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D1CB8D6-E60E-4958-885E-FF631ABC3A79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F976574D-99A5-4715-89FA-39EB98ABD157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F976574D-99A5-4715-89FA-39EB98ABD157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F976574D-99A5-4715-89FA-39EB98ABD157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F976574D-99A5-4715-89FA-39EB98ABD157}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +46,7 @@ Global
 		{645F5C61-C2A3-4882-9B77-6D70AFD71F2E} = {FB581E22-FE11-4F40-86DF-BAB5F447C0C9}
 		{266A15B9-B8B2-4461-906A-E8E90841E6FE} = {FB581E22-FE11-4F40-86DF-BAB5F447C0C9}
 		{8D1CB8D6-E60E-4958-885E-FF631ABC3A79} = {266A15B9-B8B2-4461-906A-E8E90841E6FE}
+		{F976574D-99A5-4715-89FA-39EB98ABD157} = {FB581E22-FE11-4F40-86DF-BAB5F447C0C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EFB9B76-5B05-4AB5-85CF-C908DB7B3E6D}

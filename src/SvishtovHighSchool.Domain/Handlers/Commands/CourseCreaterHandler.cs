@@ -16,6 +16,7 @@ namespace SvishtovHighSchool.Domain.Handlers.Commands
         {
             var item = new Course(message.Id, message.Name);
 
+            // TODO think a better way to handle version of events
             _repository.Save(item, -1);
         }
     }

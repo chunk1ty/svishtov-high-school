@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using SvishtovHighSchool.Domain.Events;
 
 namespace SvishtovHighSchool.Domain
@@ -13,11 +14,11 @@ namespace SvishtovHighSchool.Domain
 
         private struct EventDescriptor
         {
-            public readonly Event EventData;
+            public readonly DomainEvent EventData;
             public readonly Guid Id;
             public readonly int Version;
 
-            public EventDescriptor(Guid id, Event eventData, int version)
+            public EventDescriptor(Guid id, DomainEvent eventData, int version)
             {
                 EventData = eventData;
                 Version = version;
@@ -30,7 +31,7 @@ namespace SvishtovHighSchool.Domain
             _publisher = publisher;
         }
 
-        public void SaveEvents(Guid aggregateId, IEnumerable<Event> events, int expectedVersion)
+        public void SaveEvents(Guid aggregateId, IEnumerable<DomainEvent> events, int expectedVersion)
         {
             List<EventDescriptor> eventDescriptors;
 
@@ -65,7 +66,7 @@ namespace SvishtovHighSchool.Domain
 
         // collect all processed events for given aggregate and return them as a list
         // used to build up an aggregate from its history (Domain.LoadsFromHistory)
-        public List<Event> GetEventsForAggregate(Guid aggregateId)
+        public List<DomainEvent> GetEventsForAggregate(Guid aggregateId)
         {
             List<EventDescriptor> eventDescriptors;
 
@@ -75,6 +76,16 @@ namespace SvishtovHighSchool.Domain
             }
 
             return eventDescriptors.Select(desc => desc.EventData).ToList();
+        }
+
+        public Task<AppendResult> SaveEvents(Guid aggregateId, DomainEvent @event, int expectedVersion)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<DomainEvent>> GetEventsByAggregateId(Guid aggregateId)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -1,12 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SvishtovHighSchool.Domain.Events;
 
 namespace SvishtovHighSchool.Domain
 {
     public interface IEventStore
     {
-        void SaveEvents(Guid aggregateId, IEnumerable<Event> events, int expectedVersion);
-        List<Event> GetEventsForAggregate(Guid aggregateId);
+        Task<AppendResult> SaveEvents(Guid aggregateId, DomainEvent @event, int expectedVersion);
+
+        Task<List<DomainEvent>> GetEventsByAggregateId(Guid aggregateId);
+    }
+
+    public class AppendResult
+    {
+        public AppendResult(long nextExpectedVersion)
+        {
+            NextExpectedVersion = nextExpectedVersion;
+        }
+
+        public long NextExpectedVersion { get; }
     }
 }

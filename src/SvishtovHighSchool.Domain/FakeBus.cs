@@ -43,7 +43,7 @@ namespace SvishtovHighSchool.Domain
             }
         }
 
-        public void Publish<T>(T @event) where T : Event
+        public void Publish<T>(T @event) where T : DomainEvent
         {
             List<Action<IMessage>> handlers;
 
@@ -70,6 +70,6 @@ namespace SvishtovHighSchool.Domain
     }
     public interface IEventPublisher
     {
-        void Publish<T>(T @event) where T : Event;
+        void Publish<T>(T @event) where T : DomainEvent;
     }
 }

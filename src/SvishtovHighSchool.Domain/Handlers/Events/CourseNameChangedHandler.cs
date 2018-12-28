@@ -7,7 +7,7 @@ namespace SvishtovHighSchool.Domain.Handlers.Events
     {
         public void Handle(CourseNameChanged courseNameChanged)
         {
-            var course = Database.Courses.SingleOrDefault(x => x.Id == courseNameChanged.Id);
+            var course = Database.Courses.SingleOrDefault(x => x.Id == courseNameChanged.AggregateId);
 
             course.Name = courseNameChanged.Name;
         }

@@ -33,13 +33,13 @@ namespace SvishtovHighSchool.Domain.Domain
 
         public void Apply(CourseCreated courseCreated)
         {
-            _id = courseCreated.Id;
+            _id = courseCreated.AggregateId;
             _name = courseCreated.Name;
         }
 
         public void Apply(CourseNameChanged courseCreated)
         {
-            _id = courseCreated.Id;
+            _id = courseCreated.AggregateId;
             _name = courseCreated.Name;
         }
     }

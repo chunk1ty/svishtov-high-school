@@ -7,7 +7,7 @@ namespace SvishtovHighSchool.Domain.Handlers.Events
     {
         public void Handle(CourseCreated message)
         {
-            Database.Courses.Add(new CourseDto(message.Id, message.Name));
+            Database.Courses.Add(new CourseDto(message.AggregateId, message.Name));
         }
     }
 }

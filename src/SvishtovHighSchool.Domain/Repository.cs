@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using SvishtovHighSchool.Domain.Domain;
 
 namespace SvishtovHighSchool.Domain
@@ -14,12 +15,12 @@ namespace SvishtovHighSchool.Domain
 
         public void Save(AggregateRoot aggregate, int expectedVersion)
         {
-            _storage.SaveEvents(aggregate.Id, aggregate.GetUncommittedChanges(), expectedVersion);
+            _storage.SaveEvents(aggregate.Id, aggregate.GetUncommittedChanges().First(), expectedVersion).GetAwaiter().GetResult();
         }
 
         public T GetById(Guid id)
         {
-            var events = _storage.GetEventsForAggregate(id);
+            var events = _storage.GetEventsByAggregateId(id).GetAwaiter().GetResult();
 
             var domainObject = new T();//lots of ways to do this
             

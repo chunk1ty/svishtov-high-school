@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using EventStore.ClientAPI;
 using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Commands;
 using SvishtovHighSchool.Domain.Domain;
@@ -7,6 +8,7 @@ using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.Domain.Handlers;
 using SvishtovHighSchool.Domain.Handlers.Commands;
 using SvishtovHighSchool.Domain.Handlers.Events;
+using SvishtovHighSchool.EventStore;
 
 namespace SvishtovHighSchool.Console
 {
@@ -14,9 +16,12 @@ namespace SvishtovHighSchool.Console
     {
         public static void Main(string[] args)
         {
+             var connection = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
+            connection.ConnectAsync().Wait();
             var bus = new FakeBus();
 
-            var storage = new EventStore(bus);
+            //var storage = new Domain.EventStore(bus);
+            var storage = new EventStoreEventStore(connection);
 
             var rep = new Repository<Course>(storage);
 
@@ -39,16 +44,21 @@ namespace SvishtovHighSchool.Console
 
             bus.Send(courseCreateCommand);
 
+
+            var events = storage.GetEventsByAggregateId(courseId).GetAwaiter().GetResult();
+
             var readModelFacade = new ReadModelFacade();
             var result = readModelFacade.GetInventoryItems();
 
-            var changeCoursName = new ChangeCourseName(courseId, "Chemestry", 0);
+            var changeCoursName = new ChangeCourseName(courseId, "Chemestry");
 
             bus.Send(changeCoursName);
 
             result = readModelFacade.GetInventoryItems();
 
-            var changeCoursName1 = new ChangeCourseName(courseId, "Ankk", 1);
+            events = storage.GetEventsByAggregateId(courseId).GetAwaiter().GetResult();
+
+            var changeCoursName1 = new ChangeCourseName(courseId, "Ankk");
 
             bus.Send(changeCoursName1);
 

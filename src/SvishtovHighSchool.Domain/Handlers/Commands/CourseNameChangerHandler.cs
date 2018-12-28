@@ -18,7 +18,8 @@ namespace SvishtovHighSchool.Domain.Handlers.Commands
 
             course.ChangeName(changeCourseName.Name);
 
-            _repository.Save(course, changeCourseName.OriginalVersion);
+            // TODO think a better way to handle version of events
+            _repository.Save(course, 0);
         }
     }
 }

@@ -6,13 +6,13 @@ namespace SvishtovHighSchool.Domain.Domain
 {
     public abstract class AggregateRoot
     {
-        private readonly List<Event> _changes = new List<Event>();
+        private readonly List<DomainEvent> _changes = new List<DomainEvent>();
 
         public abstract Guid Id { get; }
 
         public int Version { get; internal set; }
 
-        public IEnumerable<Event> GetUncommittedChanges()
+        public IEnumerable<DomainEvent> GetUncommittedChanges()
         {
             return _changes;
         }
@@ -22,7 +22,7 @@ namespace SvishtovHighSchool.Domain.Domain
             _changes.Clear();
         }
 
-        public void LoadsFromHistory(IEnumerable<Event> history)
+        public void LoadsFromHistory(IEnumerable<DomainEvent> history)
         {
             foreach (var @event in history)
             {
@@ -30,13 +30,13 @@ namespace SvishtovHighSchool.Domain.Domain
             }
         }
 
-        protected void ApplyChange(Event @event)
+        protected void ApplyChange(DomainEvent @event)
         {
             ApplyChange(@event, true);
         }
 
         // push atomic aggregate changes to local history for further processing (EventStore.SaveEvents)
-        private void ApplyChange(Event ev, bool isNew)
+        private void ApplyChange(DomainEvent ev, bool isNew)
         {
             dynamic domainObject = this;
             dynamic @event = ev;
