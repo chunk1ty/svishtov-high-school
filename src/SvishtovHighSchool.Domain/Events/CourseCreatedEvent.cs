@@ -2,9 +2,10 @@
 
 namespace SvishtovHighSchool.Domain.Events
 {
-    public class CourseCreated : DomainEvent
+    //TODO naming ?
+    public class CourseCreatedEvent : DomainEvent
     {
-        public CourseCreated(Guid aggregateId, string name) : base (aggregateId)
+        public CourseCreatedEvent(Guid aggregateId, string name) : base (aggregateId)
         {
             Name = name;
         }

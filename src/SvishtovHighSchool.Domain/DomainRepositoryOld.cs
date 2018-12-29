@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using SvishtovHighSchool.Domain.Domain;
 
 namespace SvishtovHighSchool.Domain
 {
-    public class Repository<T> : IRepository<T> where T : AggregateRoot, new() //shortcut you can do as you see fit with new()
+    // TODO fixed it to fit in newest DomainRepository
+    public class DomainRepositoryOld<T> : IDomainRepository<T> where T : AggregateRoot, new() //shortcut you can do as you see fit with new()
     {
         private readonly IEventStore _storage;
 
-        public Repository(IEventStore storage)
+        public DomainRepositoryOld(IEventStore storage)
         {
             _storage = storage;
         }
@@ -26,6 +28,21 @@ namespace SvishtovHighSchool.Domain
             
             domainObject.LoadsFromHistory(events);
             return domainObject;
+        }
+
+        public Task SaveAsync(AggregateRoot aggregate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveAsync(AggregateRoot aggregate, int version)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

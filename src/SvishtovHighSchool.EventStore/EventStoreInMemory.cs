@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Events;
 
-namespace SvishtovHighSchool.Domain
+namespace SvishtovHighSchool.EventStore
 {
-    public class EventStore : IEventStore
+    public class EventStoreInMemory : IEventStore
     {
         private readonly Dictionary<Guid, List<EventDescriptor>> _current = new Dictionary<Guid, List<EventDescriptor>>();
 
@@ -26,7 +27,7 @@ namespace SvishtovHighSchool.Domain
             }
         }
 
-        public EventStore(IEventPublisher publisher)
+        public EventStoreInMemory(IEventPublisher publisher)
         {
             _publisher = publisher;
         }
@@ -75,7 +76,7 @@ namespace SvishtovHighSchool.Domain
                 throw new AggregateNotFoundException();
             }
 
-            return eventDescriptors.Select(desc => desc.EventData).ToList();
+            return eventDescriptors.Select(desc => desc.EventData).ToList<DomainEvent>();
         }
 
         public Task<AppendResult> SaveEvents(Guid aggregateId, DomainEvent @event, int expectedVersion)

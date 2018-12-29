@@ -14,11 +14,11 @@ namespace SvishtovHighSchool.EventStore
 {
     public class EventStoreEventStore : IEventStore
     {
-        private readonly IEventStoreConnection connection;
+        private readonly IEventStoreConnection _connection;
 
         public EventStoreEventStore(IEventStoreConnection connection)
         {
-            this.connection = connection;
+            _connection = connection;
         }
 
         public async Task<AppendResult> SaveEvents(Guid aggregateId, DomainEvent @event, int expectedVersion)
@@ -32,7 +32,7 @@ namespace SvishtovHighSchool.EventStore
                     Serialize(@event),
                     Encoding.UTF8.GetBytes("{}"));
 
-                var writeResult = await connection.AppendToStreamAsync(
+                var writeResult = await _connection.AppendToStreamAsync(
                     aggregateId.ToString(),
                     expectedVersion,
                     eventData);
@@ -55,7 +55,7 @@ namespace SvishtovHighSchool.EventStore
 
                 do
                 {
-                    currentSlice = await connection.ReadStreamEventsForwardAsync(
+                    currentSlice = await _connection.ReadStreamEventsForwardAsync(
                         aggregateId.ToString(),
                         nextSliceStart,
                         200,

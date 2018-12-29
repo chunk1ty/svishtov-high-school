@@ -10,7 +10,7 @@ namespace SvishtovHighSchool.Domain.Domain
 
         public abstract Guid Id { get; }
 
-        public int Version { get; internal set; }
+        public int Version { get; set; }
 
         public IEnumerable<DomainEvent> GetUncommittedChanges()
         {

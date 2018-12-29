@@ -14,7 +14,7 @@ namespace SvishtovHighSchool.Domain.Domain
 
         public Course(Guid id, string name)
         {
-            ApplyChange(new CourseCreated(id, name));
+            ApplyChange(new CourseCreatedEvent(id, name));
         }
 
         public override Guid Id => _id;
@@ -28,19 +28,19 @@ namespace SvishtovHighSchool.Domain.Domain
                 throw new ArgumentException("newName");
             }
 
-            ApplyChange(new CourseNameChanged(_id, name));
+            ApplyChange(new CourseNameChangedEvent(_id, name));
         }
 
-        public void Apply(CourseCreated courseCreated)
+        public void Apply(CourseCreatedEvent courseCreatedEvent)
         {
-            _id = courseCreated.AggregateId;
-            _name = courseCreated.Name;
+            _id = courseCreatedEvent.AggregateId;
+            _name = courseCreatedEvent.Name;
         }
 
-        public void Apply(CourseNameChanged courseCreated)
+        public void Apply(CourseNameChangedEvent courseCreated)
         {
             _id = courseCreated.AggregateId;
-            _name = courseCreated.Name;
+            _name = courseCreated.NewName;
         }
     }
 }
