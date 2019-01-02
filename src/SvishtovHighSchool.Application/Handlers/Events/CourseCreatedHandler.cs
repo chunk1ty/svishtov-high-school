@@ -1,5 +1,6 @@
 ﻿using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
 
 namespace SvishtovHighSchool.Application.Handlers.Events

@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.CSharp;
 using System.Collections.Generic;
 using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.Domain.Domain
 {

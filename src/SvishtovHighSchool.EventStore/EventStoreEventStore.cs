@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.EventStore
 {

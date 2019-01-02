@@ -1,4 +1,4 @@
-﻿namespace SvishtovHighSchool.Domain.Commands
+﻿namespace SvishtovHighSchool.Infrastructure
 {
     public class Command : IMessage
     {

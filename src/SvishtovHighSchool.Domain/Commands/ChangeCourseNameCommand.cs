@@ -1,4 +1,5 @@
 ﻿using System;
+using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.Domain.Commands
 {

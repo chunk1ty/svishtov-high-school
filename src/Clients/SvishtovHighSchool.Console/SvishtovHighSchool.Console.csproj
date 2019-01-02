@@ -92,6 +92,10 @@
       <Project>{F976574D-99A5-4715-89FA-39EB98ABD157}</Project>
       <Name>SvishtovHighSchool.EventStore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SvishtovHighSchool.Infrastructure\SvishtovHighSchool.Infrastructure.csproj">
+      <Project>{C967FA9B-0432-41B3-BCC2-D53F9F97DE02}</Project>
+      <Name>SvishtovHighSchool.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SvishtovHighSchool.ReadModel\SvishtovHighSchool.ReadModel.csproj">
       <Project>{27229F52-41E9-4943-81CA-003B0DE0497E}</Project>
       <Name>SvishtovHighSchool.ReadModel</Name>

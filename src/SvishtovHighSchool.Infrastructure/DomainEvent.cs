@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SvishtovHighSchool.Domain.Events
+namespace SvishtovHighSchool.Infrastructure
 {
     public class DomainEvent : IMessage
     {

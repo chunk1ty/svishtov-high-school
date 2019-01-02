@@ -9,6 +9,7 @@ using SvishtovHighSchool.Domain.Commands;
 using SvishtovHighSchool.Domain.Domain;
 using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.EventStore;
+using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
 
 namespace SvishtovHighSchool.Console

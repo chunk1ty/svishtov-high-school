@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
-using SvishtovHighSchool.Domain.Commands;
-using SvishtovHighSchool.Domain.Events;
 
-namespace SvishtovHighSchool.Domain
+namespace SvishtovHighSchool.Infrastructure
 {
+    public interface IHandles<T>
+    {
+        void Handle(T message);
+    }
+
+    public interface ICommandSender
+    {
+        void Send<T>(T command) where T : Command;
+
+    }
+
+    public interface IEventPublisher
+    {
+        void Publish<T>(T @event) where T : DomainEvent;
+    }
+
     public class FakeBus : ICommandSender, IEventPublisher
     {
         private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
@@ -47,7 +60,7 @@ namespace SvishtovHighSchool.Domain
         {
             List<Action<IMessage>> handlers;
 
-            if (!_routes.TryGetValue(@event.GetType(), out handlers)) return;
+            if (!_routes.TryGetValue(((Object) @event).GetType(), out handlers)) return;
 
             foreach (var handler in handlers)
             {
@@ -56,20 +69,5 @@ namespace SvishtovHighSchool.Domain
                 ThreadPool.QueueUserWorkItem(x => handler1(@event));
             }
         }
-    }
-
-    public interface IHandles<T>
-    {
-        void Handle(T message);
-    }
-
-    public interface ICommandSender
-    {
-        void Send<T>(T command) where T : Command;
-
-    }
-    public interface IEventPublisher
-    {
-        void Publish<T>(T @event) where T : DomainEvent;
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.EventStore
 {
