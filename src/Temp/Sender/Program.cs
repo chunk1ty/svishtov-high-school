@@ -1,8 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using MessageDefinition;
 using Microsoft.Azure.ServiceBus;
+using ProtoBuf;
 
 namespace Sender
 {
@@ -40,8 +42,15 @@ namespace Sender
                 for (var i = 0; i < numberOfMessagesToSend; i++)
                 {
                     string messageBody = $"Message {i}";
-                    var message = new Message(Encoding.UTF8.GetBytes(messageBody));
                    
+                    var course = new Course
+                    {
+                        Name = $"Course {i}",
+                        SomeInt = i,
+                        CreatedOn = DateTime.UtcNow
+                    };
+                    
+                    var message = new Message(Serialize(course));
                     Console.WriteLine($"Sending message: {messageBody}");
                     
                     await queueClient.SendAsync(message);
@@ -51,6 +60,20 @@ namespace Sender
             {
                 Console.WriteLine($"{DateTime.Now} :: Exception: {exception.Message}");
             }
+        }
+
+        public static byte[] Serialize(Course c)
+        {
+            byte[] msgOut;
+
+            using (var stream = new MemoryStream())
+            {
+                Serializer.Serialize(stream, c);
+                msgOut = stream.GetBuffer();
+                stream.Position = 0;
+            }
+
+            return msgOut;
         }
     }
 }

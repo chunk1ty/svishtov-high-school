@@ -9,4 +9,8 @@
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\MessageDefinition\MessageDefinition.csproj" />
+  </ItemGroup>
+
 </Project>

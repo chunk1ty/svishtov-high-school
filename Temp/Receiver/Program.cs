@@ -1,8 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MessageDefinition;
 using Microsoft.Azure.ServiceBus;
+using ProtoBuf;
 
 namespace Receiver
 {
@@ -52,6 +55,8 @@ namespace Receiver
 
         static async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
+            var course = Deserialize(message.Body);
+
             // Process the message
             Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
 
@@ -73,6 +78,18 @@ namespace Receiver
             Console.WriteLine($"- Entity Path: {context.EntityPath}");
             Console.WriteLine($"- Executing Action: {context.Action}");
             return Task.CompletedTask;
+        }
+
+        public static Course Deserialize(byte[] message)
+        {
+            Course msgOut;
+
+            using (var stream = new MemoryStream(message,0, (int)message.Length))
+            {
+                msgOut = Serializer.Deserialize<Course>(stream);
+            }
+
+            return msgOut;
         }
     }
 }
