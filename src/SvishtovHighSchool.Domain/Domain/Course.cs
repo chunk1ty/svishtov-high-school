@@ -12,9 +12,12 @@ namespace SvishtovHighSchool.Domain.Domain
         {
         }
 
-        public Course(Guid id, string name)
+        public Course(string name)
         {
-            ApplyChange(new CourseCreatedEvent(id, name));
+            var id = Guid.NewGuid();
+            var courseCreatedEvent = new CourseCreatedEvent(id, name);
+
+            ApplyChange(courseCreatedEvent);
         }
 
         public override Guid Id => _id;

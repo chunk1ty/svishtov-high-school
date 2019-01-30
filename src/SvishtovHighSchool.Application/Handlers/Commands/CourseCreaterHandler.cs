@@ -16,7 +16,7 @@ namespace SvishtovHighSchool.Application.Handlers.Commands
 
         public void Handle(CreateCourse message)
         {
-            var course = new Course(message.Id, message.Name);
+            var course = new Course(message.Name);
 
             // TODO think a better way to handle version of events
             course.Version = -1;

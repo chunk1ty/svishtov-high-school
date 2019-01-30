@@ -40,7 +40,7 @@ namespace SvishtovHighSchool.Console
             var courseId = Guid.NewGuid();
             var courseName = "Math";
 
-            var courseCreateCommand = new CreateCourse(courseId, courseName);
+            var courseCreateCommand = new CreateCourse(courseName);
 
             bus.Send(courseCreateCommand);
 
