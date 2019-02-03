@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
+
 using EventStore.ClientAPI;
 using MongoDB.Driver;
+
 using SvishtovHighSchool.Application.Handlers.Commands;
 using SvishtovHighSchool.Application.Handlers.Events;
 using SvishtovHighSchool.Domain;

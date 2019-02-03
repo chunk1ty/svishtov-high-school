@@ -1,15 +1,15 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Ankk.Models;
+
 using Microsoft.Azure.ServiceBus;
-using Google.ProtoBuf;
+
+using Ankk.Models;
 
 namespace Receiver
 {
-    class Program
+    public class Receiver
     {
         const string ServiceBusConnectionString = "Endpoint=sb://ankk-service-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AwJS2thFeAk8aqAq6FRnaERpMTc8snjH85PCJSUPUdk=";
         const string QueueName = "ankk-queue";
@@ -17,8 +17,6 @@ namespace Receiver
 
         static void Main(string[] args)
         {
-            byte[] array = new byte[] { 0, 1 };
-            Message aa = new Message(array);
             MainAsync().GetAwaiter().GetResult();
         }
 
@@ -84,14 +82,7 @@ namespace Receiver
 
         public static Course Deserialize(byte[] message)
         {
-            Course msgOut;
-
-            using (var stream = new MemoryStream(message, 0, (int)message.Length))
-            {
-                msgOut = Serializer.Deserialize<Course>(stream);
-            }
-
-            return msgOut;
+            return Course.Parser.ParseFrom(message);
         }
     }
 }

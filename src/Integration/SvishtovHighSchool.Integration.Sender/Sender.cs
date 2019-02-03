@@ -1,15 +1,14 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
-using Ankk.Models;
-using MessageDefinition;
+
 using Microsoft.Azure.ServiceBus;
-using ProtoBuf;
+
+using Ankk.Models;
+using Google.Protobuf;
 
 namespace Sender
 {
-    class Program
+    public class Sender
     {
         const string ServiceBusConnectionString = "Endpoint=sb://ankk-service-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AwJS2thFeAk8aqAq6FRnaERpMTc8snjH85PCJSUPUdk=";
         const string QueueName = "ankk-queue";
@@ -45,13 +44,13 @@ namespace Sender
                     string messageBody = $"Message {i}";
 
                     var course = new Course
-                    {
+                    { 
                         Name = $"Course {i}",
-                        SomeInt = i,
-                        CreatedOn = DateTime.UtcNow
+                        Id = i
                     };
 
                     var message = new Message(Serialize(course));
+
                     Console.WriteLine($"Sending message: {messageBody}");
 
                     await queueClient.SendAsync(message);
@@ -63,18 +62,10 @@ namespace Sender
             }
         }
 
-        public static byte[] Serialize(Course c)
+        public static byte[] Serialize(Course course)
         {
-            byte[] msgOut;
-
-            using (var stream = new MemoryStream())
-            {
-                Serializer.Serialize(stream, c);
-                msgOut = stream.GetBuffer();
-                stream.Position = 0;
-            }
-
-            return msgOut;
+            return course.ToByteArray();
         }
     }
+
 }

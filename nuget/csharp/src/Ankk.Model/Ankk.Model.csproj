@@ -9,6 +9,10 @@
     <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="generated\" />
+  </ItemGroup>
+
   <Target Name="CleanUpGeneratedFiles" BeforeTargets="CoreCompile">
     <Message Importance="high" Text="Deleting generated files" />
     <ItemGroup>
