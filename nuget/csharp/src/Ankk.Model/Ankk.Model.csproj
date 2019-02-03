@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
+  </ItemGroup>
+
+  <Target Name="CleanUpGeneratedFiles" BeforeTargets="CoreCompile">
+    <Message Importance="high" Text="Deleting generated files" />
+    <ItemGroup>
+      <Delete Files="generated/*.cs" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="GenerateCodeFromProto" BeforeTargets="CoreCompile" DependsOnTargets="CleanUpGeneratedFiles">
+    <Message Importance="high" Text="Processing .proto files" />
+    <Exec Command="powershell -ExecutionPolicy Bypass -NoProfile -File &quot;$(ProjectDir)generator.ps1&quot;" />
+    <ItemGroup>
+      <Compile Include="$(ProjectDir)/generated/*.cs" />
+    </ItemGroup>
+  </Target>
+</Project>

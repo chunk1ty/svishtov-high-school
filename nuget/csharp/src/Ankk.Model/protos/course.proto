@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option csharp_namespace = "Ankk.Models";
+
+message Course {
+  string name = 1;
+  int32 id = 2; 
+  int32 AnkName = 2; 
+}

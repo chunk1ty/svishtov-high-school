@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Ankk.Models;
 using MessageDefinition;
 using Microsoft.Azure.ServiceBus;
 using ProtoBuf;
@@ -27,7 +28,7 @@ namespace Sender
             Console.WriteLine("======================================================");
             Console.WriteLine("Press ENTER key to exit after sending all the messages.");
             Console.WriteLine("======================================================");
-            
+
             await SendMessagesAsync(numberOfMessages);
 
             Console.ReadKey();
@@ -42,17 +43,17 @@ namespace Sender
                 for (var i = 0; i < numberOfMessagesToSend; i++)
                 {
                     string messageBody = $"Message {i}";
-                   
+
                     var course = new Course
                     {
                         Name = $"Course {i}",
                         SomeInt = i,
                         CreatedOn = DateTime.UtcNow
                     };
-                    
+
                     var message = new Message(Serialize(course));
                     Console.WriteLine($"Sending message: {messageBody}");
-                    
+
                     await queueClient.SendAsync(message);
                 }
             }

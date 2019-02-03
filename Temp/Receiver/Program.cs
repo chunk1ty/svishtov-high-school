@@ -3,9 +3,9 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MessageDefinition;
+using Ankk.Models;
 using Microsoft.Azure.ServiceBus;
-using ProtoBuf;
+using Google.ProtoBuf;
 
 namespace Receiver
 {
@@ -17,6 +17,8 @@ namespace Receiver
 
         static void Main(string[] args)
         {
+            byte[] array = new byte[] { 0, 1 };
+            Message aa = new Message(array);
             MainAsync().GetAwaiter().GetResult();
         }
 
@@ -27,7 +29,7 @@ namespace Receiver
             Console.WriteLine("======================================================");
             Console.WriteLine("Press ENTER key to exit after receiving all the messages.");
             Console.WriteLine("======================================================");
-            
+
             RegisterOnMessageHandlerAndReceiveMessages();
 
             Console.ReadKey();
@@ -84,7 +86,7 @@ namespace Receiver
         {
             Course msgOut;
 
-            using (var stream = new MemoryStream(message,0, (int)message.Length))
+            using (var stream = new MemoryStream(message, 0, (int)message.Length))
             {
                 msgOut = Serializer.Deserialize<Course>(stream);
             }

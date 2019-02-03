@@ -6,11 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\MessageDefinition\MessageDefinition.csproj" />
   </ItemGroup>
 
 </Project>
