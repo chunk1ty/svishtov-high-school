@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Autofac;
+﻿using Autofac;
 
 namespace SvishtovHighSchool.Integration.Receiver
 {
@@ -11,6 +8,7 @@ namespace SvishtovHighSchool.Integration.Receiver
         {
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<Receiver>().AsSelf();
             builder.RegisterType<Service>().As<IService>();
             builder.RegisterType<ServiceConfiguration>().AsSelf();
 

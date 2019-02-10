@@ -29,9 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ankk.Model", "nuget\csharp\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{12736EB3-E5AA-490A-B006-E0FCC5C52282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.Integration.Sender", "src\Integration\SvishtovHighSchool.Integration.Sender\SvishtovHighSchool.Integration.Sender.csproj", "{C72D193E-1156-4E93-87FD-497B7AC9D458}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvishtovHighSchool.Integration.Sender", "src\Integration\SvishtovHighSchool.Integration.Sender\SvishtovHighSchool.Integration.Sender.csproj", "{C72D193E-1156-4E93-87FD-497B7AC9D458}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.Integration.Receiver", "src\Integration\SvishtovHighSchool.Integration.Receiver\SvishtovHighSchool.Integration.Receiver.csproj", "{817EA870-D23C-454C-BC90-FE733D704F56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvishtovHighSchool.Integration.Receiver", "src\Integration\SvishtovHighSchool.Integration.Receiver\SvishtovHighSchool.Integration.Receiver.csproj", "{817EA870-D23C-454C-BC90-FE733D704F56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

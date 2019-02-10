@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SvishtovHighSchool.Integration.Receiver
 {
@@ -13,9 +11,18 @@ namespace SvishtovHighSchool.Integration.Receiver
 
     public class Service : IService
     {
+        private readonly Receiver _receiver;
+
+        public Service(Receiver receiver)
+        {
+            this._receiver = receiver;
+        }
+
         public void Start()
         {
-            Console.WriteLine("start service");
+            Log<Service>.Info("start service");
+
+            _receiver.MainAsync().GetAwaiter().GetResult();
         }
 
         public void Stop()

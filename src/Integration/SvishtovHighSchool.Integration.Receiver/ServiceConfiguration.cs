@@ -9,7 +9,5 @@ namespace SvishtovHighSchool.Integration.Receiver
         public string DisplayName => ConfigurationManager.AppSettings["serviceDisplayName"];
 
         public string Description => ConfigurationManager.AppSettings["serviceDescription"];
-
-        public string Version => ConfigurationManager.AppSettings["version"];
     }
 }

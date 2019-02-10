@@ -7,20 +7,16 @@ using Microsoft.Azure.ServiceBus;
 
 using Ankk.Models;
 
-namespace Receiver
+namespace SvishtovHighSchool.Integration.Receiver
 {
     public class Receiver
     {
         const string ServiceBusConnectionString = "Endpoint=sb://ankk-service-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AwJS2thFeAk8aqAq6FRnaERpMTc8snjH85PCJSUPUdk=";
         const string QueueName = "ankk-queue";
         static IQueueClient queueClient;
+       
 
-        static void Main(string[] args)
-        {
-            MainAsync().GetAwaiter().GetResult();
-        }
-
-        static async Task MainAsync()
+        public async Task MainAsync()
         {
             queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
 
@@ -35,7 +31,7 @@ namespace Receiver
             await queueClient.CloseAsync();
         }
 
-        static void RegisterOnMessageHandlerAndReceiveMessages()
+        private void RegisterOnMessageHandlerAndReceiveMessages()
         {
             // Configure the MessageHandler Options in terms of exception handling, number of concurrent messages to deliver etc.
             var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
@@ -53,7 +49,7 @@ namespace Receiver
             queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
         }
 
-        static async Task ProcessMessagesAsync(Message message, CancellationToken token)
+        private async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             var course = Deserialize(message.Body);
 
@@ -69,7 +65,7 @@ namespace Receiver
             // to avoid unnecessary exceptions.
         }
 
-        static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
+        private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
         {
             Console.WriteLine($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
             var context = exceptionReceivedEventArgs.ExceptionReceivedContext;
