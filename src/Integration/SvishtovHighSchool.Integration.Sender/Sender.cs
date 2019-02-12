@@ -1,68 +1,45 @@
-﻿using System;
+﻿using System.Configuration;
 using System.Threading.Tasks;
 
+using Google.Protobuf;
 using Microsoft.Azure.ServiceBus;
 
-using Ankk.Models;
-using Google.Protobuf;
-
-namespace Sender
+namespace SvishtovHighSchool.Integration.Sender
 {
-    public class Sender
+    public interface ISender
     {
+        Task SendMessagesAsync(ISvishtovHighSchoolMessage message);
+    }
+
+    public interface ISvishtovHighSchoolMessage : IMessage
+    {
+    }
+
+    public class Sender : ISender
+    {
+        static IQueueClient _queueClient;
+
         const string ServiceBusConnectionString = "Endpoint=sb://ankk-service-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AwJS2thFeAk8aqAq6FRnaERpMTc8snjH85PCJSUPUdk=";
         const string QueueName = "ankk-queue";
-        static IQueueClient queueClient;
 
-        static void Main(string[] args)
+        public Sender()
         {
-            MainAsync().GetAwaiter().GetResult();
+            _queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
         }
 
-        static async Task MainAsync()
+        //public string ServiceBusConnectionString => ConfigurationManager.AppSettings["serviceBusConnectionString"];
+        //public string QueueName => ConfigurationManager.AppSettings["queueName"];
+
+        public async Task SendMessagesAsync(ISvishtovHighSchoolMessage message)
         {
-            const int numberOfMessages = 10;
-            queueClient = new QueueClient(ServiceBusConnectionString, QueueName);
+            var me = new Message(Serialize(message));
 
-            Console.WriteLine("======================================================");
-            Console.WriteLine("Press ENTER key to exit after sending all the messages.");
-            Console.WriteLine("======================================================");
+            await _queueClient.SendAsync(me);
 
-            await SendMessagesAsync(numberOfMessages);
-
-            Console.ReadKey();
-
-            await queueClient.CloseAsync();
+            //Log<Sender>.Info($"Message {message} has been sent.");
         }
 
-        static async Task SendMessagesAsync(int numberOfMessagesToSend)
-        {
-            try
-            {
-                for (var i = 0; i < numberOfMessagesToSend; i++)
-                {
-                    string messageBody = $"Message {i}";
-
-                    var course = new Course
-                    { 
-                        Name = $"Course {i}",
-                        Id = i
-                    };
-
-                    var message = new Message(Serialize(course));
-
-                    Console.WriteLine($"Sending message: {messageBody}");
-
-                    await queueClient.SendAsync(message);
-                }
-            }
-            catch (Exception exception)
-            {
-                Console.WriteLine($"{DateTime.Now} :: Exception: {exception.Message}");
-            }
-        }
-
-        public static byte[] Serialize(Course course)
+        public static byte[] Serialize(ISvishtovHighSchoolMessage course)
         {
             return course.ToByteArray();
         }
