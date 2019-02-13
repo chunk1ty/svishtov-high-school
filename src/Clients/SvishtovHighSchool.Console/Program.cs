@@ -11,6 +11,7 @@ using SvishtovHighSchool.Domain.Domain;
 using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.EventStore;
 using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Integration.Sender;
 using SvishtovHighSchool.ReadModel;
 
 namespace SvishtovHighSchool.Console
@@ -35,40 +36,40 @@ namespace SvishtovHighSchool.Console
             // create course 
             var courseCreater = new CourseCreaterHandler(rep);
             bus.RegisterHandler<CreateCourse>(courseCreater.Handle);
-            var courseCreatedHandler = new CourseCreatedHandler(courseRepository);
-            bus.RegisterHandler<CourseCreatedEvent>(courseCreatedHandler.Handle);
+            //var courseCreatedHandler = new CourseCreatedHandler(courseRepository);
+            //bus.RegisterHandler<CourseCreatedEvent>(courseCreatedHandler.Handle);
 
-            var courseId = Guid.NewGuid();
-            var courseName = "Math";
+            //var courseId = Guid.NewGuid();
+            //var courseName = "Math";
 
-            var courseCreateCommand = new CreateCourse(courseName);
+            //var courseCreateCommand = new CreateCourse(courseName);
 
-            bus.Send(courseCreateCommand);
+            //bus.Send(courseCreateCommand);
 
-            var course = courseRepository.FindAllAsync(x => true);
+            //var course = courseRepository.FindAllAsync(x => true);
 
-            // change course name
-            var changeCourseName = new CourseNameChangerHandler(rep);
-            bus.RegisterHandler<ChangeCourseNameCommand>(changeCourseName.Handle);
-            var courseNameChangedHandler = new CourseNameChangedHandler(courseRepository);
-            bus.RegisterHandler<CourseNameChangedEvent>(courseNameChangedHandler.Handle);
+            //// change course name
+            //var changeCourseName = new CourseNameChangerHandler(rep);
+            //bus.RegisterHandler<ChangeCourseNameCommand>(changeCourseName.Handle);
+            //var courseNameChangedHandler = new CourseNameChangedHandler(courseRepository);
+            //bus.RegisterHandler<CourseNameChangedEvent>(courseNameChangedHandler.Handle);
 
-            var changeCoursName = new ChangeCourseNameCommand(courseId, "Chemestry", 0);
+            //var changeCoursName = new ChangeCourseNameCommand(courseId, "Chemestry", 0);
 
-            bus.Send(changeCoursName);
+            //bus.Send(changeCoursName);
 
-            course = courseRepository.FindAllAsync(x => true);
+            //course = courseRepository.FindAllAsync(x => true);
 
 
-            var changeCoursName1 = new ChangeCourseNameCommand(courseId, "Ankk", 1);
+            //var changeCoursName1 = new ChangeCourseNameCommand(courseId, "Ankk", 1);
 
-            bus.Send(changeCoursName1);
+            //bus.Send(changeCoursName1);
 
-            course = courseRepository.FindAllAsync(x => true);
+            //course = courseRepository.FindAllAsync(x => true);
 
-            course.GetAwaiter().GetResult();
+            //course.GetAwaiter().GetResult();
 
-            System.Console.ReadKey();
+            //System.Console.ReadKey();
         }
     }
 }

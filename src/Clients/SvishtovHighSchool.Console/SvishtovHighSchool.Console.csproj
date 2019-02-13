@@ -80,6 +80,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Integration\SvishtovHighSchool.Integration.Sender\SvishtovHighSchool.Integration.Sender.csproj">
+      <Project>{C72D193E-1156-4E93-87FD-497B7AC9D458}</Project>
+      <Name>SvishtovHighSchool.Integration.Sender</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SvishtovHighSchool.Application\SvishtovHighSchool.Application.csproj">
       <Project>{645F5C61-C2A3-4882-9B77-6D70AFD71F2E}</Project>
       <Name>SvishtovHighSchool.Application</Name>

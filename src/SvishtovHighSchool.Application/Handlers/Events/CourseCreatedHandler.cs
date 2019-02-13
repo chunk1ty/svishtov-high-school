@@ -8,10 +8,12 @@ namespace SvishtovHighSchool.Application.Handlers.Events
     public class CourseCreatedHandler : IHandles<CourseCreatedEvent>
     {
         private readonly IRepository<CourseDto> _courseRepository;
+        private readonly ISender _sender;
 
-        public CourseCreatedHandler(IRepository<CourseDto> courseRepository)
+        public CourseCreatedHandler(IRepository<CourseDto> courseRepository, ISender sender)
         {
             _courseRepository = courseRepository;
+            _sender = sender;
         }
 
         public void Handle(CourseCreatedEvent @event)
@@ -23,6 +25,8 @@ namespace SvishtovHighSchool.Application.Handlers.Events
             };
 
             _courseRepository.InsertAsync(course).GetAwaiter().GetResult();
+
+            _sender.SendMessagesAsync(@event).GetAwaiter().GetResult();
         }
     }
 }

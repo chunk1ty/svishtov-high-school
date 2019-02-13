@@ -22,15 +22,15 @@ namespace SvishtovHighSchool.Infrastructure
 
     public class FakeBus : ICommandSender, IEventPublisher
     {
-        private readonly Dictionary<Type, List<Action<IMessage>>> _routes = new Dictionary<Type, List<Action<IMessage>>>();
+        private readonly Dictionary<Type, List<Action<IDomainMessage>>> _routes = new Dictionary<Type, List<Action<IDomainMessage>>>();
 
-        public void RegisterHandler<T>(Action<T> handler) where T : IMessage
+        public void RegisterHandler<T>(Action<T> handler) where T : IDomainMessage
         {
-            List<Action<IMessage>> handlers;
+            List<Action<IDomainMessage>> handlers;
 
             if (!_routes.TryGetValue(typeof(T), out handlers))
             {
-                handlers = new List<Action<IMessage>>();
+                handlers = new List<Action<IDomainMessage>>();
                 _routes.Add(typeof(T), handlers);
             }
 
@@ -39,7 +39,7 @@ namespace SvishtovHighSchool.Infrastructure
 
         public void Send<T>(T command) where T : Command
         {
-            List<Action<IMessage>> handlers;
+            List<Action<IDomainMessage>> handlers;
 
             if (_routes.TryGetValue(typeof(T), out handlers))
             {
@@ -58,7 +58,7 @@ namespace SvishtovHighSchool.Infrastructure
 
         public void Publish<T>(T @event) where T : DomainEvent
         {
-            List<Action<IMessage>> handlers;
+            List<Action<IDomainMessage>> handlers;
 
             if (!_routes.TryGetValue(((Object) @event).GetType(), out handlers)) return;
 

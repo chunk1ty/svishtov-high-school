@@ -2,7 +2,7 @@
 
 namespace SvishtovHighSchool.Infrastructure
 {
-    public class DomainEvent : IMessage
+    public class DomainEvent : IDomainMessage
     {
         // TODO Version or CreatedOn ?
         public int Version;

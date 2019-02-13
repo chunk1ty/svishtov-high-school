@@ -24,23 +24,23 @@ namespace Ankk.Models {
     static CourseReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Cgxjb3Vyc2UucHJvdG8iIgoGQ291cnNlEgwKBG5hbWUYASABKAkSCgoCaWQY",
-            "AiABKAVCDqoCC0Fua2suTW9kZWxzYgZwcm90bzM="));
+            "Cgxjb3Vyc2UucHJvdG8iKQoNQ291cnNlVXBkYXRlZBIMCgRuYW1lGAEgASgJ",
+            "EgoKAmlkGAIgASgJQg6qAgtBbmtrLk1vZGVsc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Ankk.Models.Course), global::Ankk.Models.Course.Parser, new[]{ "Name", "Id" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Ankk.Models.CourseUpdated), global::Ankk.Models.CourseUpdated.Parser, new[]{ "Name", "Id" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class Course : pb::IMessage<Course> {
-    private static readonly pb::MessageParser<Course> _parser = new pb::MessageParser<Course>(() => new Course());
+  public sealed partial class CourseUpdated : pb::IMessage<CourseUpdated> {
+    private static readonly pb::MessageParser<CourseUpdated> _parser = new pb::MessageParser<CourseUpdated>(() => new CourseUpdated());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<Course> Parser { get { return _parser; } }
+    public static pb::MessageParser<CourseUpdated> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
@@ -53,22 +53,22 @@ namespace Ankk.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Course() {
+    public CourseUpdated() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Course(Course other) : this() {
+    public CourseUpdated(CourseUpdated other) : this() {
       name_ = other.name_;
       id_ = other.id_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public Course Clone() {
-      return new Course(this);
+    public CourseUpdated Clone() {
+      return new CourseUpdated(this);
     }
 
     /// <summary>Field number for the "name" field.</summary>
@@ -84,22 +84,22 @@ namespace Ankk.Models {
 
     /// <summary>Field number for the "id" field.</summary>
     public const int IdFieldNumber = 2;
-    private int id_;
+    private string id_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public int Id {
+    public string Id {
       get { return id_; }
       set {
-        id_ = value;
+        id_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as Course);
+      return Equals(other as CourseUpdated);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(Course other) {
+    public bool Equals(CourseUpdated other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -115,7 +115,7 @@ namespace Ankk.Models {
     public override int GetHashCode() {
       int hash = 1;
       if (Name.Length != 0) hash ^= Name.GetHashCode();
-      if (Id != 0) hash ^= Id.GetHashCode();
+      if (Id.Length != 0) hash ^= Id.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -133,9 +133,9 @@ namespace Ankk.Models {
         output.WriteRawTag(10);
         output.WriteString(Name);
       }
-      if (Id != 0) {
-        output.WriteRawTag(16);
-        output.WriteInt32(Id);
+      if (Id.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Id);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -148,8 +148,8 @@ namespace Ankk.Models {
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
       }
-      if (Id != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Id);
+      if (Id.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Id);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -158,14 +158,14 @@ namespace Ankk.Models {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(Course other) {
+    public void MergeFrom(CourseUpdated other) {
       if (other == null) {
         return;
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
       }
-      if (other.Id != 0) {
+      if (other.Id.Length != 0) {
         Id = other.Id;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -183,8 +183,8 @@ namespace Ankk.Models {
             Name = input.ReadString();
             break;
           }
-          case 16: {
-            Id = input.ReadInt32();
+          case 18: {
+            Id = input.ReadString();
             break;
           }
         }

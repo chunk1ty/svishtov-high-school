@@ -76,9 +76,9 @@ namespace SvishtovHighSchool.Integration.Receiver
             return Task.CompletedTask;
         }
 
-        public static Course Deserialize(byte[] message)
+        public static CourseUpdated Deserialize(byte[] message)
         {
-            return Course.Parser.ParseFrom(message);
+            return CourseUpdated.Parser.ParseFrom(message);
         }
     }
 }

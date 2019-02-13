@@ -1,6 +1,6 @@
 ﻿namespace SvishtovHighSchool.Infrastructure
 {
-    public class Command : IMessage
+    public class Command : IDomainMessage
     {
     }
 }

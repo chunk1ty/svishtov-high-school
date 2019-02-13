@@ -1,6 +1,6 @@
 ﻿namespace SvishtovHighSchool.Infrastructure
 {
-    public interface IMessage
+    public interface IDomainMessage
     {
     }
 }
