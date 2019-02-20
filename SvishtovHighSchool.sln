@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvishtovHighSchool.Integrat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvishtovHighSchool.Integration.Receiver", "src\Integration\SvishtovHighSchool.Integration.Receiver\SvishtovHighSchool.Integration.Receiver.csproj", "{817EA870-D23C-454C-BC90-FE733D704F56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.Integration.Converters", "src\Integration\SvishtovHighSchool.Integration.Converters\SvishtovHighSchool.Integration.Converters.csproj", "{61B00F72-56E5-4DD3-B622-463AE0DF9C5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{817EA870-D23C-454C-BC90-FE733D704F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{817EA870-D23C-454C-BC90-FE733D704F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{817EA870-D23C-454C-BC90-FE733D704F56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61B00F72-56E5-4DD3-B622-463AE0DF9C5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61B00F72-56E5-4DD3-B622-463AE0DF9C5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61B00F72-56E5-4DD3-B622-463AE0DF9C5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61B00F72-56E5-4DD3-B622-463AE0DF9C5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +99,7 @@ Global
 		{12736EB3-E5AA-490A-B006-E0FCC5C52282} = {FB581E22-FE11-4F40-86DF-BAB5F447C0C9}
 		{C72D193E-1156-4E93-87FD-497B7AC9D458} = {12736EB3-E5AA-490A-B006-E0FCC5C52282}
 		{817EA870-D23C-454C-BC90-FE733D704F56} = {12736EB3-E5AA-490A-B006-E0FCC5C52282}
+		{61B00F72-56E5-4DD3-B622-463AE0DF9C5D} = {12736EB3-E5AA-490A-B006-E0FCC5C52282}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EFB9B76-5B05-4AB5-85CF-C908DB7B3E6D}

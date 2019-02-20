@@ -26,7 +26,7 @@ namespace SvishtovHighSchool.Application.Handlers.Events
 
             _courseRepository.InsertAsync(course).GetAwaiter().GetResult();
 
-            _sender.SendMessagesAsync(@event).GetAwaiter().GetResult();
+            _sender.SendMessagesAsync<CourseCreatedEvent>(@event).GetAwaiter().GetResult();
         }
     }
 }

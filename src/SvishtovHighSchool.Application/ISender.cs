@@ -5,6 +5,6 @@ namespace SvishtovHighSchool.Application
 {
     public interface ISender
     {
-        Task SendMessagesAsync(IDomainMessage domainMessage);
+        Task SendMessagesAsync<T>(T domainMessage) where T : IDomainMessage;
     }
 }

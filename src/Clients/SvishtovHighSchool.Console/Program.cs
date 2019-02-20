@@ -20,6 +20,11 @@ namespace SvishtovHighSchool.Console
     {
         public static void Main(string[] args)
         {
+
+            var sender = new Sender();
+            var courseCreatedEvent = new CourseCreatedEvent(Guid.NewGuid(), "ank");
+            sender.SendMessagesAsync<CourseCreatedEvent>(courseCreatedEvent).GetAwaiter().GetResult();
+
             // configure EventStore
             var connection = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
             connection.ConnectAsync().Wait();
