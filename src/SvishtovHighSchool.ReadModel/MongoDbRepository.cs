@@ -22,7 +22,9 @@ namespace SvishtovHighSchool.ReadModel
     public interface IRepository<T> : IReadOnlyRepository<T>
         where T : IReadEntity
     {
-        Task InsertAsync(T entity);
+        Task AddAsync(T entity);
+
+        void Add(T entity);
 
         Task UpdateAsync(T entity);
     }
@@ -53,12 +55,24 @@ namespace SvishtovHighSchool.ReadModel
                 .SingleAsync();
         }
 
-        public async Task InsertAsync(T entity)
+        public async Task AddAsync(T entity)
         {
             try
             {
                 await _mongoDatabase.GetCollection<T>(CollectionName)
                     .InsertOneAsync(entity);
+            }
+            catch (MongoWriteException ex)
+            {
+                throw new RepositoryException($"Error inserting entity {entity.Id}", ex);
+            }
+        }
+
+        public void Add(T entity)
+        {
+            try
+            {
+               _mongoDatabase.GetCollection<T>(CollectionName).InsertOne(entity);
             }
             catch (MongoWriteException ex)
             {

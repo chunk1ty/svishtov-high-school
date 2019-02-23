@@ -1,0 +1,18 @@
+﻿@model CourseViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Add Course
+</h2>
+
+<form asp-controller="Home" asp-action="Index">
+    Name: <input asp-for="Name"/> <br/> 
+    
+    <button type="submit">
+         Save
+    </button>
+</form>

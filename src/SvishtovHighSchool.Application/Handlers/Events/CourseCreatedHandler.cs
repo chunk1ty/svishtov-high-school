@@ -1,4 +1,5 @@
-﻿using SvishtovHighSchool.Domain;
+﻿using System;
+using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
@@ -20,11 +21,20 @@ namespace SvishtovHighSchool.Application.Handlers.Events
         {
             var course = new CourseDto
             {
-                Id = @event.AggregateId.ToString(),
+                AggregateId = @event.AggregateId.ToString(),
                 Name = @event.Name
             };
 
-            _courseRepository.InsertAsync(course).GetAwaiter().GetResult();
+            try
+            {
+                _courseRepository.Add(course);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
 
             _sender.SendMessagesAsync<CourseCreatedEvent>(@event).GetAwaiter().GetResult();
         }

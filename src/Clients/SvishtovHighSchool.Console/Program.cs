@@ -20,18 +20,13 @@ namespace SvishtovHighSchool.Console
     {
         public static void Main(string[] args)
         {
-
-            var sender = new Sender();
-            var courseCreatedEvent = new CourseCreatedEvent(Guid.NewGuid(), "ank");
-            sender.SendMessagesAsync<CourseCreatedEvent>(courseCreatedEvent).GetAwaiter().GetResult();
-
             // configure EventStore
             var connection = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
             connection.ConnectAsync().Wait();
             var storage = new EventStoreEventStore(connection);
 
             // configure MongoDB
-            var mongoDatabase = new MongoClient("mongodb://127.0.0.1:27017").GetDatabase("SvishtovHighSchool");
+            var mongoDatabase = new MongoClient("mongodb://127.0.0.1:27017").GetDatabase("SvishtovHighSchoolDb");
             var courseRepository = new MongoDbRepository<CourseDto>(mongoDatabase);
 
             var bus = new FakeBus();
@@ -41,19 +36,20 @@ namespace SvishtovHighSchool.Console
             // create course 
             var courseCreater = new CourseCreaterHandler(rep);
             bus.RegisterHandler<CreateCourse>(courseCreater.Handle);
-            //var courseCreatedHandler = new CourseCreatedHandler(courseRepository);
-            //bus.RegisterHandler<CourseCreatedEvent>(courseCreatedHandler.Handle);
+            var sender = new Sender();
+            var courseCreatedHandler = new CourseCreatedHandler(courseRepository, sender);
+            bus.RegisterHandler<CourseCreatedEvent>(courseCreatedHandler.Handle);
 
-            //var courseId = Guid.NewGuid();
-            //var courseName = "Math";
+            var courseId = Guid.NewGuid();
+            var courseName = "Math";
 
-            //var courseCreateCommand = new CreateCourse(courseName);
+            var courseCreateCommand = new CreateCourse(courseName);
 
-            //bus.Send(courseCreateCommand);
+            bus.Send(courseCreateCommand);
 
-            //var course = courseRepository.FindAllAsync(x => true);
+            var course = courseRepository.FindAllAsync(x => true);
 
-            //// change course name
+            // change course name
             //var changeCourseName = new CourseNameChangerHandler(rep);
             //bus.RegisterHandler<ChangeCourseNameCommand>(changeCourseName.Handle);
             //var courseNameChangedHandler = new CourseNameChangedHandler(courseRepository);
@@ -74,7 +70,7 @@ namespace SvishtovHighSchool.Console
 
             //course.GetAwaiter().GetResult();
 
-            //System.Console.ReadKey();
+            System.Console.ReadKey();
         }
     }
 }
