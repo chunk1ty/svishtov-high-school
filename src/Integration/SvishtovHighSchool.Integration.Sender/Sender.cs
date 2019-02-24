@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using Microsoft.Azure.ServiceBus;
 using SvishtovHighSchool.Application;
-using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Domain.CourseModule;
 using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.Integration.Converters;
 

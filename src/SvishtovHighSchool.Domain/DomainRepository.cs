@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SvishtovHighSchool.Domain.Domain;
+using MediatR;
+using SvishtovHighSchool.Domain.Core;
 using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.Domain
@@ -8,12 +9,12 @@ namespace SvishtovHighSchool.Domain
     public class DomainRepository<T> : IDomainRepository<T>  where T : AggregateRoot, new()
     {
         private readonly IEventStore _eventStore;
-        private readonly IEventPublisher _publisher;
+        private readonly IMediator _mediator;
 
-        public DomainRepository(IEventStore eventStore, IEventPublisher publisher)
+        public DomainRepository(IEventStore eventStore, IMediator mediator)
         {
             _eventStore = eventStore;
-            _publisher = publisher;
+            _mediator = mediator;
         }
 
         public async Task<T> GetByIdAsync(Guid id)
@@ -35,7 +36,7 @@ namespace SvishtovHighSchool.Domain
             {
                 await _eventStore.SaveEvents(aggregate.Id, @event, version);
 
-                _publisher.Publish(@event);
+                await _mediator.Publish(@event);
             }
 
             aggregate.MarkChangesAsCommitted();

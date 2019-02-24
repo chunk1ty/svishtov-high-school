@@ -6,9 +6,6 @@ using MongoDB.Driver;
 using SvishtovHighSchool.Application.Handlers.Commands;
 using SvishtovHighSchool.Application.Handlers.Events;
 using SvishtovHighSchool.Domain;
-using SvishtovHighSchool.Domain.Commands;
-using SvishtovHighSchool.Domain.Domain;
-using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.EventStore;
 using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.Integration.Sender;
@@ -21,9 +18,9 @@ namespace SvishtovHighSchool.Console
         public static void Main(string[] args)
         {
             // configure EventStore
-            //var connection = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
-            //connection.ConnectAsync().Wait();
-            //var storage = new EventStoreEventStore(connection);
+            var connection = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
+            connection.ConnectAsync().Wait();
+            var storage = new EventStoreEventStore(connection);
 
             //// configure MongoDB
             //var mongoDatabase = new MongoClient("mongodb://127.0.0.1:27017").GetDatabase("SvishtovHighSchoolDb");
@@ -34,8 +31,8 @@ namespace SvishtovHighSchool.Console
             //var rep = new DomainRepository<Course>(storage, bus);
 
             //// create course 
-            //var courseCreater = new CourseCreaterHandler(rep);
-            //bus.RegisterHandler<CreateCourse>(courseCreater.Handle);
+            //var courseCreater = new CourseCreatorHandler(rep);
+            //bus.RegisterHandler<CreateCourseCommand>(courseCreater.Handle);
             //var sender = new Sender();
             //var courseCreatedHandler = new CourseCreatedHandler(courseRepository, sender);
             //bus.RegisterHandler<CourseCreatedEvent>(courseCreatedHandler.Handle);
@@ -43,7 +40,7 @@ namespace SvishtovHighSchool.Console
             //var courseId = Guid.NewGuid();
             //var courseName = "Math";
 
-            //var courseCreateCommand = new CreateCourse(courseName);
+            //var courseCreateCommand = new CreateCourseCommand(courseName);
 
             //bus.Send(courseCreateCommand);
 

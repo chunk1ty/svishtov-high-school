@@ -1,9 +1,8 @@
 ﻿using System;
 using SvishtovHighSchool.Infrastructure;
 
-namespace SvishtovHighSchool.Domain.Events
+namespace SvishtovHighSchool.Domain.CourseModule
 {
-    //TODO naming ?
     public class CourseCreatedEvent : DomainEvent
     {
         public CourseCreatedEvent(Guid aggregateId, string name) : base (aggregateId)

@@ -1,7 +1,7 @@
 ﻿using System;
 using SvishtovHighSchool.Infrastructure;
 
-namespace SvishtovHighSchool.Domain.Commands
+namespace SvishtovHighSchool.Domain.CourseModule
 {
     public class ChangeCourseNameCommand : Command
     {

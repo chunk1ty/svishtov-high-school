@@ -1,6 +1,8 @@
-﻿namespace SvishtovHighSchool.Infrastructure
+﻿using MediatR;
+
+namespace SvishtovHighSchool.Infrastructure
 {
-    public interface IDomainMessage
+    public interface IDomainMessage : INotification
     {
     }
 }

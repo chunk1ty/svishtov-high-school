@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using MongoDB.Driver;
-using SvishtovHighSchool.ReadModel;
+using SvishtovHighSchool.Domain.CourseModule;
+using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel.Contracts;
 using SvishtovHighSchool.Web.Models;
 
@@ -11,25 +10,28 @@ namespace SvishtovHighSchool.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICourseRepository _courseRepository;
+        private readonly IMediator _mediator;
 
-        public HomeController(ICourseRepository courseRepository)
+        public HomeController(IMediator mediator)
         {
-            _courseRepository = courseRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var r = await _courseRepository.GetAllAsync(); 
-
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(CourseViewModel course)
+        public async Task<IActionResult> Index(CourseViewModel course)
         {
-            return null;
+            var courseCommand = new CreateCourseCommand(course.Name);
+
+            await _mediator.Publish(courseCommand);
+            
+
+            return RedirectToAction("Index");
         }
     }
 }

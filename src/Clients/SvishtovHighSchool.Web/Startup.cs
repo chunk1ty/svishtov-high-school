@@ -1,13 +1,23 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using EventStore.ClientAPI;
+using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using SvishtovHighSchool.Application.Handlers.Commands;
+using SvishtovHighSchool.Application.Handlers.Events;
+using SvishtovHighSchool.Domain;
+using SvishtovHighSchool.Domain.CourseModule;
+using SvishtovHighSchool.EventStore;
+using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
 using SvishtovHighSchool.ReadModel.Contracts;
 using SvishtovHighSchool.ReadModel.Repositories;
+
 
 namespace SvishtovHighSchool.Web
 {
@@ -30,6 +40,8 @@ namespace SvishtovHighSchool.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMediatR(typeof(CourseCreatorHandler).Assembly, typeof(CreateCourseCommand).Assembly);
 
             DbRegistrations(services);
         }
@@ -61,10 +73,21 @@ namespace SvishtovHighSchool.Web
 
         private void DbRegistrations(IServiceCollection services)
         {
-            services.AddSingleton(x => new MongoClient(Configuration.GetSection("MongoConnection:ConnectionString").Value));
-            services.AddSingleton(x => x.GetService<MongoClient>().GetDatabase(Configuration.GetSection("MongoConnection:Database").Value));
+            //services.AddSingleton(x => EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113")));
+            services.AddSingleton<IEventStore, EventStoreEventStore>();
+
+            services.AddScoped(x => new MongoClient(Configuration.GetSection("MongoConnection:ConnectionString").Value));
+            services.AddScoped(x => x.GetService<MongoClient>().GetDatabase(Configuration.GetSection("MongoConnection:Database").Value));
             services.AddScoped<SvishtovHighSchoolDbContext>();
             services.AddScoped<ICourseRepository, MongoDbCourseRepository>();
+            services.AddScoped<IReadOnlyCourseRepository, MongoDbCourseRepository>();
+
+            services.AddScoped<ICommandSender, FakeBus>();
+            services.AddScoped<IEventPublisher, FakeBus>();
+            services.AddScoped<CourseCreatedHandler>();
+
+            services.AddScoped(typeof(IDomainRepository<>), typeof(DomainRepository<>));
+            
         }
     }
 }

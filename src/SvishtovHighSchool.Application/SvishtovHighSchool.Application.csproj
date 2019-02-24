@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SvishtovHighSchool.Domain\SvishtovHighSchool.Domain.csproj" />
     <ProjectReference Include="..\SvishtovHighSchool.ReadModel.Contracts\SvishtovHighSchool.ReadModel.Contracts.csproj" />
     <ProjectReference Include="..\SvishtovHighSchool.ReadModel\SvishtovHighSchool.ReadModel.csproj" />

@@ -1,7 +1,7 @@
 ﻿using System;
-using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Domain.Core;
 
-namespace SvishtovHighSchool.Domain.Domain
+namespace SvishtovHighSchool.Domain.CourseModule
 {
     public class Course : AggregateRoot
     {
@@ -24,14 +24,14 @@ namespace SvishtovHighSchool.Domain.Domain
 
         public string Name => _name;
 
-        public void ChangeName(string name)
+        public void ChangeName(string newName)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(newName))
             {
                 throw new ArgumentException("newName");
             }
 
-            ApplyChange(new CourseNameChangedEvent(_id, name));
+            ApplyChange(new CourseNameChangedEvent(_id, newName));
         }
 
         public void Apply(CourseCreatedEvent courseCreatedEvent)

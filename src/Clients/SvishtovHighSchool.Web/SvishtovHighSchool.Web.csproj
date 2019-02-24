@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EventStore.ClientAPI.NetCore" Version="4.1.0.23" />
+    <PackageReference Include="MediatR" Version="6.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
@@ -12,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SvishtovHighSchool.Application\SvishtovHighSchool.Application.csproj" />
+    <ProjectReference Include="..\..\SvishtovHighSchool.EventStore\SvishtovHighSchool.EventStore.csproj" />
     <ProjectReference Include="..\..\SvishtovHighSchool.ReadModel\SvishtovHighSchool.ReadModel.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SvishtovHighSchool.Domain.Domain;
+using SvishtovHighSchool.Domain.Core;
 
 namespace SvishtovHighSchool.Domain
 {

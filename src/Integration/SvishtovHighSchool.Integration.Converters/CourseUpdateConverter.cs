@@ -1,6 +1,6 @@
 ﻿using Ankk.Models;
 using Google.Protobuf;
-using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Domain.CourseModule;
 
 namespace SvishtovHighSchool.Integration.Converters
 {

@@ -1,5 +1,5 @@
 ﻿using SvishtovHighSchool.Domain;
-using SvishtovHighSchool.Domain.Events;
+using SvishtovHighSchool.Domain.CourseModule;
 using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
 using SvishtovHighSchool.ReadModel.Contracts;
