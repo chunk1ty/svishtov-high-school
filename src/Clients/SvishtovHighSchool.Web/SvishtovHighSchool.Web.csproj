@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Integration\SvishtovHighSchool.Integration.Sender\SvishtovHighSchool.Integration.Sender.csproj" />
     <ProjectReference Include="..\..\SvishtovHighSchool.Application\SvishtovHighSchool.Application.csproj" />
     <ProjectReference Include="..\..\SvishtovHighSchool.EventStore\SvishtovHighSchool.EventStore.csproj" />
     <ProjectReference Include="..\..\SvishtovHighSchool.ReadModel\SvishtovHighSchool.ReadModel.csproj" />

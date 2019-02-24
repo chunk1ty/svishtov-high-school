@@ -2,12 +2,9 @@
 
 using EventStore.ClientAPI;
 using MongoDB.Driver;
-
-using SvishtovHighSchool.Application.Handlers.Commands;
-using SvishtovHighSchool.Application.Handlers.Events;
 using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.EventStore;
-using SvishtovHighSchool.Infrastructure;
+
 using SvishtovHighSchool.Integration.Sender;
 using SvishtovHighSchool.ReadModel;
 

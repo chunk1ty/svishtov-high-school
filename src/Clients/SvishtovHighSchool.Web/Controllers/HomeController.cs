@@ -2,8 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SvishtovHighSchool.Domain.CourseModule;
-using SvishtovHighSchool.Infrastructure;
-using SvishtovHighSchool.ReadModel.Contracts;
+using SvishtovHighSchool.Domain.CourseModule.Commands;
 using SvishtovHighSchool.Web.Models;
 
 namespace SvishtovHighSchool.Web.Controllers

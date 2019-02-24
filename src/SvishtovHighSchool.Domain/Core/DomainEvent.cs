@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SvishtovHighSchool.Infrastructure
+namespace SvishtovHighSchool.Domain.Core
 {
     public class DomainEvent : IDomainMessage
     {

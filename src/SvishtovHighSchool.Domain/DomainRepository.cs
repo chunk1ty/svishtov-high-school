@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MediatR;
 using SvishtovHighSchool.Domain.Core;
-using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.Domain
 {

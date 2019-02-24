@@ -7,7 +7,7 @@ using EventStore.ClientAPI;
 using Newtonsoft.Json;
 
 using SvishtovHighSchool.Domain;
-using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Domain.Core;
 
 namespace SvishtovHighSchool.EventStore
 {
@@ -15,10 +15,9 @@ namespace SvishtovHighSchool.EventStore
     {
         private readonly IEventStoreConnection _connection;
 
-        public EventStoreEventStore()
+        public EventStoreEventStore(IEventStoreConnection connection)
         {
-            _connection = EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113"));
-            _connection.ConnectAsync().Wait();
+            _connection = connection;
         }
 
         public async Task<AppendResult> SaveEvents(Guid aggregateId, DomainEvent @event, int expectedVersion)

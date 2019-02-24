@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SvishtovHighSchool.Infrastructure;
 
 namespace SvishtovHighSchool.Domain.Core
 {

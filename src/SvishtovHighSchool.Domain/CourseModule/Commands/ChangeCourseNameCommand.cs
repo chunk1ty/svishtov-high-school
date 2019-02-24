@@ -1,9 +1,9 @@
 ﻿using System;
-using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Domain.Core;
 
-namespace SvishtovHighSchool.Domain.CourseModule
+namespace SvishtovHighSchool.Domain.CourseModule.Commands
 {
-    public class ChangeCourseNameCommand : Command
+    public class ChangeCourseNameCommand : DomainCommand
     {
         public ChangeCourseNameCommand(Guid id, string name, int originalVersion)
         {

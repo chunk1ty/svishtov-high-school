@@ -1,7 +1,7 @@
 ﻿using System;
-using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Domain.Core;
 
-namespace SvishtovHighSchool.Domain.CourseModule
+namespace SvishtovHighSchool.Domain.CourseModule.Events
 {
     public class CourseNameChangedEvent : DomainEvent
     {

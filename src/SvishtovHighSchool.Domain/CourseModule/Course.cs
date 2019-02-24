@@ -1,5 +1,6 @@
 ﻿using System;
 using SvishtovHighSchool.Domain.Core;
+using SvishtovHighSchool.Domain.CourseModule.Events;
 
 namespace SvishtovHighSchool.Domain.CourseModule
 {

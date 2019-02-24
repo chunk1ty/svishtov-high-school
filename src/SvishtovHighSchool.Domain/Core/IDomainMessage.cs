@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace SvishtovHighSchool.Infrastructure
+namespace SvishtovHighSchool.Domain.Core
 {
     public interface IDomainMessage : INotification
     {

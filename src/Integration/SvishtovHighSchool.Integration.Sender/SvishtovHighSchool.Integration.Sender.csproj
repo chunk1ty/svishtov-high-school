@@ -19,7 +19,6 @@
     <ProjectReference Include="..\..\..\nuget\csharp\src\Ankk.Model\Ankk.Model.csproj" />
     <ProjectReference Include="..\..\SvishtovHighSchool.Application\SvishtovHighSchool.Application.csproj" />
     <ProjectReference Include="..\..\SvishtovHighSchool.Domain\SvishtovHighSchool.Domain.csproj" />
-    <ProjectReference Include="..\..\SvishtovHighSchool.Infrastructure\SvishtovHighSchool.Infrastructure.csproj" />
     <ProjectReference Include="..\SvishtovHighSchool.Integration.Converters\SvishtovHighSchool.Integration.Converters.csproj" />
   </ItemGroup>
 

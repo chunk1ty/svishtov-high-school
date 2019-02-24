@@ -8,12 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
-using SvishtovHighSchool.Application.Handlers.Commands;
-using SvishtovHighSchool.Application.Handlers.Events;
+using SvishtovHighSchool.Application;
+using SvishtovHighSchool.Application.Handlers.Course;
 using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.CourseModule;
+using SvishtovHighSchool.Domain.CourseModule.Commands;
 using SvishtovHighSchool.EventStore;
-using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Integration.Sender;
 using SvishtovHighSchool.ReadModel;
 using SvishtovHighSchool.ReadModel.Contracts;
 using SvishtovHighSchool.ReadModel.Repositories;
@@ -39,15 +40,14 @@ namespace SvishtovHighSchool.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddMediatR(typeof(CourseCreatorHandler).Assembly, typeof(CreateCourseCommand).Assembly);
-
-            DbRegistrations(services);
+            DiRegistrations(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IEventStoreConnection eventStoreConnection)
         {
             if (env.IsDevelopment())
             {
@@ -69,25 +69,29 @@ namespace SvishtovHighSchool.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            eventStoreConnection.ConnectAsync().Wait();
         }
 
-        private void DbRegistrations(IServiceCollection services)
+        private void DiRegistrations(IServiceCollection services)
         {
-            //services.AddSingleton(x => EventStoreConnection.Create(new Uri("tcp://admin:changeit@localhost:1113")));
+            // TODO check EventStoreEventStore registration
+            services.AddSingleton(x => EventStoreConnection.Create(new Uri(Configuration.GetSection("EventStore:Connection").Value)));
             services.AddSingleton<IEventStore, EventStoreEventStore>();
 
-            services.AddScoped(x => new MongoClient(Configuration.GetSection("MongoConnection:ConnectionString").Value));
-            services.AddScoped(x => x.GetService<MongoClient>().GetDatabase(Configuration.GetSection("MongoConnection:Database").Value));
-            services.AddScoped<SvishtovHighSchoolDbContext>();
-            services.AddScoped<ICourseRepository, MongoDbCourseRepository>();
-            services.AddScoped<IReadOnlyCourseRepository, MongoDbCourseRepository>();
+            // TODO check Mongo registration
+            services.AddSingleton(x => new MongoClient(Configuration.GetSection("MongoConnection:ConnectionString").Value));
+            services.AddSingleton(x => x.GetService<MongoClient>().GetDatabase(Configuration.GetSection("MongoConnection:Database").Value));
 
-            services.AddScoped<ICommandSender, FakeBus>();
-            services.AddScoped<IEventPublisher, FakeBus>();
-            services.AddScoped<CourseCreatedHandler>();
+            services.AddTransient<SvishtovHighSchoolDbContext>();
+            services.AddTransient<ICourseRepository, MongoDbCourseRepository>();
+            services.AddTransient<IReadOnlyCourseRepository, MongoDbCourseRepository>();
 
-            services.AddScoped(typeof(IDomainRepository<>), typeof(DomainRepository<>));
-            
+            services.AddTransient(typeof(IDomainRepository<>), typeof(DomainRepository<>));
+
+            services.AddMediatR(typeof(CourseCreatorHandler).Assembly, typeof(CreateCourseCommand).Assembly);
+
+            services.AddTransient<ISender, Sender>();
         }
     }
 }

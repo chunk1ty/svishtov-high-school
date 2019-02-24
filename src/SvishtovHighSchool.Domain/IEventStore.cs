@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Domain.Core;
 
 namespace SvishtovHighSchool.Domain
 {

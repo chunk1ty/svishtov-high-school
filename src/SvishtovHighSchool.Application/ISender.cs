@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using SvishtovHighSchool.Infrastructure;
+using SvishtovHighSchool.Domain.Core;
 
 namespace SvishtovHighSchool.Application
 {
