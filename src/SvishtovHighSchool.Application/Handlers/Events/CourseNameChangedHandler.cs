@@ -2,15 +2,15 @@
 using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
+using SvishtovHighSchool.ReadModel.Contracts;
 
 namespace SvishtovHighSchool.Application.Handlers.Events
 {
     public class CourseNameChangedHandler : IHandles<CourseNameChangedEvent>
     {
-        // TODO ReadModelFacade instead of IRepository<CourseDto> ?
-        private readonly IRepository<CourseDto> _courseRepository;
+        private readonly ICourseRepository _courseRepository;
 
-        public CourseNameChangedHandler(IRepository<CourseDto> courseRepository)
+        public CourseNameChangedHandler(ICourseRepository courseRepository)
         {
             _courseRepository = courseRepository;
         }
@@ -20,8 +20,7 @@ namespace SvishtovHighSchool.Application.Handlers.Events
             var course = _courseRepository.GetByIdAsync(@event.AggregateId.ToString()).GetAwaiter().GetResult();
 
             course.Name = @event.NewName;
-
-            // TODO CourseService UpdateAsync ?
+           
             _courseRepository.UpdateAsync(course).GetAwaiter().GetResult();
         }
     }

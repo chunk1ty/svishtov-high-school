@@ -10,6 +10,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SvishtovHighSchool.Domain\SvishtovHighSchool.Domain.csproj" />
+    <ProjectReference Include="..\SvishtovHighSchool.ReadModel.Contracts\SvishtovHighSchool.ReadModel.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>..\..\..\..\.nuget\packages\microsoft.extensions.options\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

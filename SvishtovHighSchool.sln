@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SvishtovHighSchool.Integrat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.Web", "src\Clients\SvishtovHighSchool.Web\SvishtovHighSchool.Web.csproj", "{870B99CB-8C2D-4842-BF6D-C9B7C0C8726E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SvishtovHighSchool.ReadModel.Contracts", "src\SvishtovHighSchool.ReadModel.Contracts\SvishtovHighSchool.ReadModel.Contracts.csproj", "{28EBBEE5-8DC5-4BA4-A850-2636DD0BBB79}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{870B99CB-8C2D-4842-BF6D-C9B7C0C8726E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{870B99CB-8C2D-4842-BF6D-C9B7C0C8726E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{870B99CB-8C2D-4842-BF6D-C9B7C0C8726E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28EBBEE5-8DC5-4BA4-A850-2636DD0BBB79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28EBBEE5-8DC5-4BA4-A850-2636DD0BBB79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28EBBEE5-8DC5-4BA4-A850-2636DD0BBB79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28EBBEE5-8DC5-4BA4-A850-2636DD0BBB79}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{817EA870-D23C-454C-BC90-FE733D704F56} = {12736EB3-E5AA-490A-B006-E0FCC5C52282}
 		{61B00F72-56E5-4DD3-B622-463AE0DF9C5D} = {12736EB3-E5AA-490A-B006-E0FCC5C52282}
 		{870B99CB-8C2D-4842-BF6D-C9B7C0C8726E} = {266A15B9-B8B2-4461-906A-E8E90841E6FE}
+		{28EBBEE5-8DC5-4BA4-A850-2636DD0BBB79} = {FB581E22-FE11-4F40-86DF-BAB5F447C0C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6EFB9B76-5B05-4AB5-85CF-C908DB7B3E6D}

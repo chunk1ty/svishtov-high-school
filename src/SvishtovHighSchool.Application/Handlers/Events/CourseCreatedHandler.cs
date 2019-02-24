@@ -3,15 +3,17 @@ using SvishtovHighSchool.Domain;
 using SvishtovHighSchool.Domain.Events;
 using SvishtovHighSchool.Infrastructure;
 using SvishtovHighSchool.ReadModel;
+using SvishtovHighSchool.ReadModel.Contracts;
+using SvishtovHighSchool.ReadModel.Entities;
 
 namespace SvishtovHighSchool.Application.Handlers.Events
 {
     public class CourseCreatedHandler : IHandles<CourseCreatedEvent>
     {
-        private readonly IRepository<CourseDto> _courseRepository;
+        private readonly ICourseRepository _courseRepository;
         private readonly ISender _sender;
 
-        public CourseCreatedHandler(IRepository<CourseDto> courseRepository, ISender sender)
+        public CourseCreatedHandler(ICourseRepository courseRepository, ISender sender)
         {
             _courseRepository = courseRepository;
             _sender = sender;
@@ -19,15 +21,11 @@ namespace SvishtovHighSchool.Application.Handlers.Events
 
         public void Handle(CourseCreatedEvent @event)
         {
-            var course = new CourseDto
-            {
-                AggregateId = @event.AggregateId.ToString(),
-                Name = @event.Name
-            };
+            var course = new CourseDto(@event.AggregateId.ToString(), @event.Name);
 
             try
             {
-                _courseRepository.Add(course);
+                _courseRepository.AddAsync(course).GetAwaiter().GetResult();
             }
             catch (Exception e)
             {
